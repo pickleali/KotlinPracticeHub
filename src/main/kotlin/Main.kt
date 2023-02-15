@@ -4,8 +4,9 @@ fun main() {
 
     val userList = listOf(3, 2, 5, 1, 5, 6, 7)
     val result = largestItem(userList)
-    val x = userList.productOfListItems()
-    print (x)
+    val x = Article("medium", "SaaS", "latest")
+    val y = Article("hackernews", "AI", "top")
+    y.articleOfTheDay()
 }
 fun arithmetic() {
     /** 1. arithmetic manipulation & operations **/
@@ -158,29 +159,6 @@ fun searchIndex(list: List<Int>, userInput: Int): Int {
     // Functions with named parameters 'list' & 'userInput' does not need to be called in the right order.
     // For example: searchIndex(myList, 1) is the same as searchIndex(1, myList).
     return list.indexOf(userInput)
-}
-
-fun articleOfTheDay(website: String = "Medium", topic: String = "Technology") {
-    /** the aim of this function is to practice the following:
-     * 1. implement nested function for readability purposes
-     * 2. revise multiple learning outcomes:
-     *      when keyword, kotlin libraries, dealing with lists, and manipulate data for certain purpose.
-     * 3. Practice 'vararg': To pass a variable number of arguments to a function [instead of a,b,c,d..etc. One argument is enough]
-     **/
-
-    fun shuffleListItems(vararg input: Int): Int {
-        val shuffleIndex = kotlin.random.Random.nextInt(from = 0, until = input.size-1)
-        return input[shuffleIndex]
-    }
-    println("Good morning!\nThe recommended ($topic) article from $website website: ")
-    val items = shuffleListItems(1, 2, 3, 4, 5)
-    when(items) {
-        1 -> print("Node.js fundamentals")
-        2 -> print("KMM structure explained")
-        3 -> print("The age of Agile must end. By: Michael Burnett")
-        4 -> print("1 Million People Can’t Be Wrong: New Bing Is Taking Over Search. By: Liquid Ocelot")
-        5 -> print("The Simpsons: A Visionary Look into the Future of UX Design. By: Dinah Manongi")
-    }
 }
 
 fun List<Int>.productOfListItems(): Int {
