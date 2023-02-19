@@ -1,13 +1,62 @@
+import Cars.Sedan
+import java.lang.NumberFormatException
 import kotlin.math.pow
 
 fun main() {
 
-    val userList = listOf(3, 2, 5, 1, 5, 6, 7)
+/*    val userList = listOf(3, 2, 5, 1, 5, 6, 7)
     val result = largestItem(userList)
     val x = Article("medium", "SaaS", "latest")
     val y = Article("hackernews", "AI", "top")
     y.articleOfTheDay()
+    val car1 = Sedan()
+    val car2 = Sedan()
+    val car3 = Sedan()
+    var sedanList = listOf(car1, car2, car3)
+    sedanList = sedanList.customFilter{ it.filterByYear() }
+    for (sedan in sedanList) {
+        println("year: ($sedan)")
+    }*/
+
+    var list = (1..10).toList()
+    val sum = list.customSum{ it % 2 == 1 }
+    print(sum)
+
+
 }
+
+fun List<Int>.customSum(filterFunction: (Int) -> Boolean): Int {
+    var result = 0
+    for (item in this) {
+        if (filterFunction(item))
+            result+=item
+    }
+    return result
+}
+
+fun <T> List<T>.customFilter(filterFunction: (T) -> (Boolean)): List<T> {
+    // custom implementation for lambda function (from scratch):
+    // <T> is called generic type: for any type of object, customFilter function is applicable.
+    // you can revise the explanaition of the fun definiton/parameter/return type: https://youtu.be/wnyN8umZIRM?t=555
+    val resultList = mutableListOf<T>()
+    for (item in this) {
+        if(filterFunction((item))) {
+            resultList.add(item)
+        }
+    }
+    return resultList
+}
+
+fun lambdaFunctionExample () {
+
+    //pre-definied lambda function example - provided by kotlin standard library
+    val list = (1..10).toList()
+    println(list)
+    val filter = list.filter { it > 8 && it % 2 == 0 } // 'it' refers to each item on the list
+    print(filter)
+
+}
+
 fun arithmetic() {
     /** 1. arithmetic manipulation & operations **/
     // a. Types
@@ -22,6 +71,7 @@ fun arithmetic() {
 
      println("The volume of the sphere with radius $radius is $volume")
 }
+
 fun strings() {
     /** 2. [String] **/
      val name: String = "ali"
@@ -29,6 +79,7 @@ fun strings() {
      val palindrome = "racecar"
      if (palindrome == palindrome.reversed()) print("this is a palindrome") else print("this is not a palindrome")
 }
+
 fun ifConditions() {
     /** 3. [If-condition] **/
      val ifInsideValue = if(3>4) 0 else 1
@@ -38,6 +89,7 @@ fun ifConditions() {
      if (userInput == null) print("NULL VALUE") else print("The input you have entered is: $userInput")
      // tip: if you want to enter null value as a user input: Ctrl+D (Intellij specific)
 }
+
 fun arrays() {
     /** 4. [Arrays & Loops] **/
     val myArray = arrayOf(1, 2, 3, 43, 28)
@@ -72,6 +124,7 @@ fun arrays() {
     val result = firstNumber.toDouble().pow(secondNumber.toDouble())
     print("Result is: $result")
 }
+
 fun lists() {
     /** 5. [List]
     Lists are immutable (cannot be changed at run-time).
@@ -115,12 +168,19 @@ fun lists() {
                 fibonacciList.add(temp)
     } // to be continued.. :)
 }
+
 fun whenKeyword() {
     /** 6. [When] keyword
      * 'when' keyword is used when we depend on [one] variable inside if-else(s) statement.
      * For example: each age range will have different message (1..5-> young) (5..20->kid ;p) **/
 
-    val age = readlnOrNull()?.toInt()
+    val age = try {
+        readlnOrNull()?.toInt()
+    } catch (e: NumberFormatException) {
+        0
+    } finally {
+        print("This will be printed anyway (finally block)")
+    }
     val x = 5
     when (age) {
         in 1..5 -> print("Hey, kid :)")
@@ -132,6 +192,7 @@ fun whenKeyword() {
         else -> print("Wisdom phase of life")
     }
 }
+
 fun sumOfValues(input: Int) {
 
     //Homework - Part 16 (functions and parameters)
